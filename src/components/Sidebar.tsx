@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 import { GiHelmet } from 'react-icons/gi'
 import { LuSwords } from 'react-icons/lu'
 
@@ -12,12 +13,13 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
-  const [selectedMenu, setSelectedMenu] = useState<string>('home')
+  const pathname = usePathname()
+  const [selectedMenu, setSelectedMenu] = useState<string>(pathname)
 
-  const handleMenuClick = (menu: string) => {
-    toggleMenu()
-    setSelectedMenu(menu)
-  }
+  useEffect(() => {
+    const path = pathname.split('/')[1]
+    setSelectedMenu(path)
+  }, [pathname])
 
   return (
     <section
@@ -32,11 +34,11 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
       </button>
 
       <nav className="h-full flex flex-col justify-center items-center gap-10">
-        <Link href="/" onClick={() => handleMenuClick('home')}>
+        <Link href="/" onClick={toggleMenu}>
           <div className="flex flex-col justify-center items-center">
             <Image
               src={`/assets/${
-                selectedMenu === 'home' ? 'home-fill.svg' : 'home.svg'
+                selectedMenu === '' ? 'home-fill.svg' : 'home.svg'
               }`}
               alt="home"
               width={48}
@@ -45,7 +47,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
             <span className="text-xl mt-2">홈</span>
           </div>
         </Link>
-        <Link href="/champions" onClick={() => handleMenuClick('champions')}>
+        <Link href="/champions" onClick={toggleMenu}>
           <div className="flex flex-col justify-center items-center">
             <Image
               src={`/assets/${
@@ -60,7 +62,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
             <span className="text-xl mt-2">챔피언</span>
           </div>
         </Link>
-        <Link href="/items" onClick={() => handleMenuClick('items')}>
+        <Link href="/items" onClick={toggleMenu}>
           <div className="flex flex-col justify-center items-center">
             <LuSwords
               className={`text-5xl ${
@@ -70,7 +72,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
             <span className="text-xl mt-2">아이템</span>
           </div>
         </Link>
-        <Link href="/rotation" onClick={() => handleMenuClick('rotation')}>
+        <Link href="/rotation" onClick={toggleMenu}>
           <div className="flex flex-col justify-center items-center">
             <GiHelmet
               className={`text-5xl ${
