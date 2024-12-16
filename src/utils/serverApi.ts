@@ -1,17 +1,19 @@
-async function getLatestVersion() {
+import { ChampionDetail } from '@/types/Champion'
+
+async function getLatestVersion(): Promise<string> {
   try {
     const response = await fetch(
       'https://ddragon.leagueoflegends.com/api/versions.json'
     )
     if (!response.ok) throw new Error('Failed to fetch versions')
-    const data: string[] = await response.json()
+    const data = await response.json()
     return data[0]
   } catch (error) {
     throw error
   }
 }
 
-export async function getChampions() {
+export async function getChampions(): Promise<Record<string, ChampionDetail>> {
   try {
     const version = await getLatestVersion() // 최신 버전 갖고오기
     const response = await fetch(
