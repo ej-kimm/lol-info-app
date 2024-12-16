@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { GiHelmet } from 'react-icons/gi'
 import { LuSwords } from 'react-icons/lu'
 
@@ -15,14 +15,34 @@ interface SidebarProps {
 export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
   const pathname = usePathname()
   const [selectedMenu, setSelectedMenu] = useState<string>(pathname)
+  const sidebarRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const path = pathname.split('/')[1]
     setSelectedMenu(path)
   }, [pathname])
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        menuIsOpen &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(e.target as Node)
+      ) {
+        toggleMenu()
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [menuIsOpen])
+
   return (
     <section
+      ref={sidebarRef}
       className={`
           fixed top-0 right-0 h-screen w-[350px] bg-gray-800 shadow-lg
           transform transition-transform duration-300 ease-in-out
