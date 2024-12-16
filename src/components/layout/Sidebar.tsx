@@ -44,7 +44,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
     <section
       ref={sidebarRef}
       className={`
-          fixed top-0 right-0 h-screen w-[350px] bg-gray-800 shadow-lg
+          fixed top-0 right-0 h-screen w-[350px] bg-gray-800 shadow-lg z-50
           transform transition-transform duration-300 ease-in-out
           ${menuIsOpen ? 'translate-x-0' : 'translate-x-full'}
         `}
