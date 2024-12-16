@@ -4,6 +4,7 @@ export interface Champion {
   name: string
   title: string
   tags: string[]
+  imageUrl: string
 }
 
 export interface ChampionDetail extends Champion {
