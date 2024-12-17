@@ -3,6 +3,8 @@ export interface Item {
   description: string
   colloq: string
   plaintext: string
+  imageUrl: string
+  consumed?: boolean
   inStore?: boolean
   into?: string[]
   image: {

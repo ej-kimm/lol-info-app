@@ -1,4 +1,5 @@
 import { Champion, ChampionDetail } from '@/types/Champion'
+import { Item } from '@/types/Item'
 
 async function getLatestVersion(): Promise<string> {
   try {
@@ -17,7 +18,11 @@ function getChampionImageUrl(version: string, imageFileName: string): string {
   return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${imageFileName}`
 }
 
-async function getChampionsWithImage(
+function getItemImageUrl(version: string, imageFileName: string): string {
+  return `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${imageFileName}`
+}
+
+async function createChampionsWithImage(
   champions: Record<string, Champion>,
   version: string
 ) {
@@ -30,6 +35,21 @@ async function getChampionsWithImage(
   })
 
   return updatedChampions
+}
+
+async function createItemsWithImage(
+  items: Record<string, Item>,
+  version: string
+) {
+  const updatedItems: Record<string, Item> = {}
+
+  Object.keys(items).forEach((itemName) => {
+    const item = items[itemName]
+    const imageUrl = getItemImageUrl(version, item.image.full)
+    updatedItems[itemName] = { ...item, imageUrl }
+  })
+
+  return updatedItems
 }
 
 export async function getChampions(): Promise<Record<string, Champion>> {
@@ -46,7 +66,7 @@ export async function getChampions(): Promise<Record<string, Champion>> {
     if (!response.ok) throw new Error('Failed to fetch champions')
     const data = await response.json()
     const champions = data.data
-    return await getChampionsWithImage(champions, version)
+    return await createChampionsWithImage(champions, version)
   } catch (error: any) {
     throw new Error(error.message)
   }
@@ -73,6 +93,24 @@ export async function getChampionDetailById(
     const championDetail = data.data[id]
     const imageUrl = getChampionImageUrl(version, championDetail.image.full)
     return { ...championDetail, imageUrl }
+  } catch (error: any) {
+    throw new Error(error.message)
+  }
+}
+
+export async function getItems(): Promise<Record<string, Item>> {
+  try {
+    const version = await getLatestVersion() // 최신 버전 갖고오기
+    const response = await fetch(
+      `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/item.json`,
+      {
+        cache: 'force-cache',
+      }
+    )
+    if (!response.ok) throw new Error('Failed to fetch items')
+    const data = await response.json()
+    const items = data.data
+    return await createItemsWithImage(items, version)
   } catch (error: any) {
     throw new Error(error.message)
   }
