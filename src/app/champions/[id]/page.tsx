@@ -1,4 +1,5 @@
-import { getChampionsDetailById } from '@/utils/serverApi'
+import ChampionDetail from '@/components/champions/ChampionDetail'
+import { getChampionDetailById } from '@/utils/serverApi'
 import React from 'react'
 
 type Props = {
@@ -9,14 +10,18 @@ type Props = {
 
 export const generateMetadata = async ({ params }: Props) => {
   const { id } = params
-  const champion = await getChampionsDetailById(id)
+  const champion = await getChampionDetailById(id)
 
   return {
     title: `${champion.name} - ${champion.title}`,
     description: champion.blurb,
+    image: champion.imageUrl,
   }
 }
 
-export default function ChampionDetailPage() {
-  return <div></div>
+export default async function ChampionDetailPage({ params }: Props) {
+  const { id } = params
+  const championDetail = await getChampionDetailById(id)
+
+  return <ChampionDetail championDetail={championDetail} />
 }
