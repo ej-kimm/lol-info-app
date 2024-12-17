@@ -20,7 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <QueryProvider>{children}</QueryProvider>
+        <div className="pt-[90px] h-full">
+          <QueryProvider>{children}</QueryProvider>
+        </div>
       </body>
     </html>
   )

@@ -2,7 +2,7 @@ import HomeListCard from '@/components/ui/HomeListCard'
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="h-full flex flex-col items-center justify-center">
       <h1 className="text-6xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 mb-8 animate__animated animate__fadeIn">
         리그 오브 레전드 정보 앱
       </h1>
