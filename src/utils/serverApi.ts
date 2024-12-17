@@ -1,4 +1,4 @@
-import { ChampionDetail } from '@/types/Champion'
+import { Champion } from '@/types/Champion'
 
 async function getLatestVersion(): Promise<string> {
   try {
@@ -14,10 +14,10 @@ async function getLatestVersion(): Promise<string> {
 }
 
 async function getChampionsWithImage(
-  champions: Record<string, ChampionDetail>,
+  champions: Record<string, Champion>,
   version: string
 ) {
-  const updatedChampions: Record<string, ChampionDetail> = {}
+  const updatedChampions: Record<string, Champion> = {}
 
   Object.keys(champions).forEach((championName) => {
     const champion = champions[championName]
@@ -28,7 +28,7 @@ async function getChampionsWithImage(
   return updatedChampions
 }
 
-export async function getChampions(): Promise<Record<string, ChampionDetail>> {
+export async function getChampions(): Promise<Record<string, Champion>> {
   try {
     const version = await getLatestVersion() // 최신 버전 갖고오기
     const response = await fetch(

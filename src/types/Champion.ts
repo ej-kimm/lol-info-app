@@ -1,15 +1,11 @@
 export interface Champion {
+  version: string
   id: string
   key: string
   name: string
   title: string
-  tags: string[]
-  imageUrl: string
-}
-
-export interface ChampionDetail extends Champion {
-  version: string
   blurb: string
+  imageUrl: string
   info: {
     attack: number
     defense: number
@@ -25,6 +21,7 @@ export interface ChampionDetail extends Champion {
     w: number
     h: number
   }
+  tags: string[]
   partype: string
   stats: {
     hp: number
