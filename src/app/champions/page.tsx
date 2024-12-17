@@ -1,5 +1,5 @@
 import ChampionList from '@/components/champions/ChampionList'
-import { Champion } from '@/types/Champion'
+import type { Champion } from '@/types/Champion'
 import { getChampions } from '@/utils/serverApi'
 
 async function getChampionsData(): Promise<Champion[]> {

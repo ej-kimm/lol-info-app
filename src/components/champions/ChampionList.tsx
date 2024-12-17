@@ -1,4 +1,4 @@
-import { Champion } from '@/types/Champion'
+import type { Champion } from '@/types/Champion'
 import React from 'react'
 import ChampionCard from './ChampionCard'
 
