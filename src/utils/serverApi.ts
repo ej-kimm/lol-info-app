@@ -1,4 +1,4 @@
-import { Champion } from '@/types/Champion'
+import { Champion, ChampionDetail } from '@/types/Champion'
 
 async function getLatestVersion(): Promise<string> {
   try {
@@ -43,6 +43,28 @@ export async function getChampions(): Promise<Record<string, Champion>> {
     const data = await response.json()
     const champions = data.data
     return await getChampionsWithImage(champions, version)
+  } catch (error: any) {
+    throw new Error(error.message)
+  }
+}
+
+export async function getChampionsDetailById(
+  id: string
+): Promise<ChampionDetail> {
+  try {
+    const version = await getLatestVersion()
+    const response = await fetch(
+      `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/champion/${id}.json`,
+      {
+        next: {
+          revalidate: 86400, // 1day
+        },
+      }
+    )
+    if (!response.ok) throw new Error('Failed to fetch champions detail')
+    const data = await response.json()
+    if (!data.data[id]) throw new Error(`Champion ${id} not found`)
+    return data.data[id]
   } catch (error: any) {
     throw new Error(error.message)
   }

@@ -46,3 +46,62 @@ export interface Champion {
     attackspeed: number
   }
 }
+
+export interface ChampionDetail extends Champion {
+  skins: {
+    id: string
+    num: number
+    name: string
+    chromas: boolean
+  }[]
+  lore: string
+  allytips: string[]
+  enemytips: string[]
+  spells: {
+    id: string
+    name: string
+    description: string
+    tooltip: string
+    leveltip: {
+      label: string[]
+      effect: string[]
+    }
+    maxrank: number
+    cooldown: number[]
+    cooldownBurn: string
+    cost: number[]
+    costBurn: string
+    datavalues?: object
+    effect: (null | number[])[]
+    effectBurn: (null | string)[]
+    vars?: object[]
+    costType: string
+    maxammo: string
+    range: number[]
+    rangeBurn: string
+    image: {
+      full: string
+      sprite: string
+      group: string
+      x: number
+      y: number
+      w: number
+      h: number
+    }
+    resource: string
+  }[]
+  passive: {
+    name: string
+    description: string
+    image: {
+      full: string
+      sprite: string
+      group: string
+      x: number
+      y: number
+      w: number
+      h: number
+    }
+  }
+  recommended?: any[]
+}
