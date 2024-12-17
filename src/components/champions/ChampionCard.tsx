@@ -1,6 +1,6 @@
 'use client'
 
-import { Champion } from '@/types/Champion'
+import type { Champion } from '@/types/Champion'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
