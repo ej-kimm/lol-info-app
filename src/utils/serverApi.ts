@@ -13,6 +13,10 @@ async function getLatestVersion(): Promise<string> {
   }
 }
 
+function getChampionImageUrl(version: string, imageFileName: string): string {
+  return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${imageFileName}`
+}
+
 async function getChampionsWithImage(
   champions: Record<string, Champion>,
   version: string
@@ -21,7 +25,7 @@ async function getChampionsWithImage(
 
   Object.keys(champions).forEach((championName) => {
     const champion = champions[championName]
-    const imageUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`
+    const imageUrl = getChampionImageUrl(version, champion.image.full)
     updatedChampions[championName] = { ...champion, imageUrl }
   })
 
@@ -48,7 +52,7 @@ export async function getChampions(): Promise<Record<string, Champion>> {
   }
 }
 
-export async function getChampionsDetailById(
+export async function getChampionDetailById(
   id: string
 ): Promise<ChampionDetail> {
   try {
@@ -64,7 +68,11 @@ export async function getChampionsDetailById(
     if (!response.ok) throw new Error('Failed to fetch champions detail')
     const data = await response.json()
     if (!data.data[id]) throw new Error(`Champion ${id} not found`)
-    return data.data[id]
+
+    // imageUrl 추가
+    const championDetail = data.data[id]
+    const imageUrl = getChampionImageUrl(version, championDetail.image.full)
+    return { ...championDetail, imageUrl }
   } catch (error: any) {
     throw new Error(error.message)
   }
