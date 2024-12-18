@@ -16,7 +16,7 @@ export default function DarkModeProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(true)
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode)
@@ -24,12 +24,21 @@ export default function DarkModeProvider({
   }
 
   useEffect(() => {
-    const isDark =
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    setIsDarkMode(isDark)
-    updateDarkMode(isDark)
+    const theme = localStorage.getItem('theme')
+
+    if (!theme) {
+      // 로컬 스토리지에 값이 없으면 기본적으로 다크모드로 설정
+      setIsDarkMode(true)
+      updateDarkMode(true)
+    } else if (theme === 'dark') {
+      // 로컬 스토리지에 'dark'가 저장되어 있으면 다크모드로 설정
+      setIsDarkMode(true)
+      updateDarkMode(true)
+    } else if (theme === 'light') {
+      // 로컬 스토리지에 'light'가 저장되어 있으면 라이트모드로 설정
+      setIsDarkMode(false)
+      updateDarkMode(false)
+    }
   }, [])
 
   return (
