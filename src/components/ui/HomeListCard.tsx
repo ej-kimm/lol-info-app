@@ -20,7 +20,7 @@ export default function HomeListCard({ src, text }: HomeListProps) {
           className="w-full h-60 object-cover"
         />
         <div className="p-6 text-center">
-          <p className="text-lg font-semibold">{text}</p>
+          <p className="text-lg font-semibold text-gray-50">{text}</p>
         </div>
       </Link>
     </div>

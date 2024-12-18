@@ -8,6 +8,6 @@
     @apply w-screen h-screen max-w-screen-2xl mx-auto;
 
     /* 기본 컬러 */
-    @apply bg-zinc-900 text-gray-50;
+    @apply bg-bgLight dark:bg-zinc-900 text-textDark dark:text-gray-50;
   }
 }

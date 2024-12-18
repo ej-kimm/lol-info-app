@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import QueryProvider from '@/components/providers/QueryProvider'
+import DarkModeProvider from '@/components/providers/DarkModeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <div className="pt-[90px] h-full">
-          <QueryProvider>{children}</QueryProvider>
-        </div>
+        <DarkModeProvider>
+          <Navbar />
+          <div className="pt-[90px] h-full">
+            <QueryProvider>{children}</QueryProvider>
+          </div>
+        </DarkModeProvider>
       </body>
     </html>
   )

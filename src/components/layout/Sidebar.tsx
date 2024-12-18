@@ -49,7 +49,10 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
           ${menuIsOpen ? 'translate-x-0' : 'translate-x-full'}
         `}
     >
-      <button className="text-4xl absolute top-4 right-5" onClick={toggleMenu}>
+      <button
+        className="text-4xl absolute top-4 right-5 text-gray-50"
+        onClick={toggleMenu}
+      >
         &times;
       </button>
 
@@ -64,7 +67,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
               width={48}
               height={48}
             />
-            <span className="text-xl mt-2">홈</span>
+            <span className="text-xl mt-2 text-gray-50">홈</span>
           </div>
         </Link>
         <Link href="/champions" onClick={toggleMenu}>
@@ -79,7 +82,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
               width={48}
               height={48}
             />
-            <span className="text-xl mt-2">챔피언</span>
+            <span className="text-xl mt-2 text-gray-50">챔피언</span>
           </div>
         </Link>
         <Link href="/items" onClick={toggleMenu}>
@@ -89,7 +92,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
                 selectedMenu === 'items' ? 'text-brand' : 'text-[#CCCCCC]'
               }`}
             />
-            <span className="text-xl mt-2">아이템</span>
+            <span className="text-xl mt-2 text-gray-50">아이템</span>
           </div>
         </Link>
         <Link href="/rotation" onClick={toggleMenu}>
@@ -99,7 +102,7 @@ export default function Sidebar({ menuIsOpen, toggleMenu }: SidebarProps) {
                 selectedMenu === 'rotation' ? 'text-brand' : 'text-[#CCCCCC]'
               }`}
             />
-            <span className="text-xl mt-2">로테이션</span>
+            <span className="text-xl mt-2 text-gray-50">로테이션</span>
           </div>
         </Link>
       </nav>

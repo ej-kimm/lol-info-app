@@ -12,7 +12,7 @@ export default function ChampionCard({ champion }: ChampionCardProps) {
     <li className="group">
       <Link href={`/champions/${champion.id}`}>
         <div className="relative flex flex-col items-center">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-gray-400">
+          <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-black dark:border-gray-400">
             <Image
               src={champion.imageUrl}
               width={120}

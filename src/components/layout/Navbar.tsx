@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LuSwords } from 'react-icons/lu'
 import { GiHelmet } from 'react-icons/gi'
+import { useDarkMode } from '../providers/DarkModeProvider'
+import { HiMoon, HiSun } from 'react-icons/hi'
 
 type NavbarContent = {
   icon: ReactNode
@@ -33,6 +35,7 @@ const NAVBAR_CONTENTS: Readonly<Record<string, NavbarContent>> = {
 
 export default function Navbar() {
   const pathname = usePathname()
+  const { isDarkMode, toggleDarkMode } = useDarkMode()
   const [currentPath, setCurrentPath] = useState<string>(pathname)
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false)
   const currentContent = NAVBAR_CONTENTS[currentPath] || {}
@@ -53,11 +56,22 @@ export default function Navbar() {
       </Link>
       <div className="relative -left-7 flex gap-2 justify-center items-center">
         {currentContent.icon}
-        <span className="text-2xl font-bold">{currentContent.label}</span>
+        <span className="text-2xl font-bold text-gray-50">
+          {currentContent.label}
+        </span>
       </div>
-      <button type="button" onClick={toggleMenu}>
-        <MdMenu className="text-4xl" />
-      </button>
+      <div className="flex gap-3">
+        <button onClick={toggleDarkMode}>
+          {isDarkMode ? (
+            <HiMoon className="text-2xl text-gray-50" />
+          ) : (
+            <HiSun className="text-2xl text-gray-50" />
+          )}
+        </button>
+        <button type="button" onClick={toggleMenu}>
+          <MdMenu className="text-4xl text-gray-50" />
+        </button>
+      </div>
 
       <Sidebar menuIsOpen={menuIsOpen} toggleMenu={toggleMenu} />
     </header>
