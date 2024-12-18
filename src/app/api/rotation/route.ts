@@ -14,6 +14,9 @@ export async function GET() {
       headers: {
         'X-Riot-Token': apiKey,
       },
+      next: {
+        revalidate: 86400,
+      },
     }
   )
   if (!response.ok) throw new Error('Failed to fetch champion-rotations')
