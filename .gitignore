@@ -28,6 +28,15 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# Yarn Zero-Install folders
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.yarnrc.yml
+
 # vercel
 .vercel
 
