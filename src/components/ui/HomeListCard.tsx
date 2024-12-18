@@ -11,7 +11,7 @@ type HomeListProps = {
 export default function HomeListCard({ src, text }: HomeListProps) {
   return (
     <div className="bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-      <Link href="/champions">
+      <Link href={`/${src}`}>
         <Image
           src={`/assets/${src}.webp`}
           width={400}

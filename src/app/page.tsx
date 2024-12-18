@@ -11,7 +11,7 @@ export default function Home() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <HomeListCard src="championsList" text="챔피언 목록 보기" />
+        <HomeListCard src="champions" text="챔피언 목록 보기" />
         <HomeListCard src="rotation" text="금주 로테이션 확인" />
         <HomeListCard src="items" text="아이템 목록 보기" />
       </div>
