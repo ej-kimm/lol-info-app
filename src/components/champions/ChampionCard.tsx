@@ -15,8 +15,8 @@ export default function ChampionCard({ champion }: ChampionCardProps) {
           <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-black dark:border-gray-400">
             <Image
               src={champion.imageUrl}
-              width={120}
-              height={120}
+              width={130}
+              height={130}
               alt={champion.id}
             />
           </div>
