@@ -1,6 +1,7 @@
 'use client'
 
 import ChampionList from '@/components/champions/ChampionList'
+import LoadingBar from '@/components/ui/LoadingBar'
 import { useQuery } from '@tanstack/react-query'
 
 export default function RotationPage() {
@@ -19,7 +20,7 @@ export default function RotationPage() {
     },
   })
 
-  if (isPending) return <p>Loading...</p>
+  if (isPending) return <LoadingBar />
   if (isError) return <p>Error: {error.message}</p>
 
   return (

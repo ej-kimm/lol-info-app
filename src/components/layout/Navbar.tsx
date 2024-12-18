@@ -51,7 +51,7 @@ export default function Navbar() {
       <Link href="/">
         <Image src="/assets/Logo.png" width={150} height={100} alt="logo" />
       </Link>
-      <div className="flex gap-2 justify-center items-center">
+      <div className="relative -left-7 flex gap-2 justify-center items-center">
         {currentContent.icon}
         <span className="text-2xl font-bold">{currentContent.label}</span>
       </div>
