@@ -47,7 +47,6 @@ export interface Champion {
 }
 
 export interface ChampionDetail extends Champion {
-  version: string
   skins: {
     id: string
     num: number

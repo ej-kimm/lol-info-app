@@ -18,21 +18,6 @@ function getItemImageUrl(version: string, imageFileName: string): string {
   return `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${imageFileName}`
 }
 
-// async function createChampionsWithImage(
-//   champions: Record<string, Champion>,
-//   version: string
-// ) {
-//   const updatedChampions: Record<string, Champion> = {}
-
-//   Object.keys(champions).forEach((championName) => {
-//     const champion = champions[championName]
-//     const imageUrl = getChampionImageUrl(version, champion.image.full)
-//     updatedChampions[championName] = { ...champion, imageUrl }
-//   })
-
-//   return updatedChampions
-// }
-
 async function createItemsWithImage(
   items: Record<string, Item>,
   version: string
