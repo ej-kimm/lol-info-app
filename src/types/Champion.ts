@@ -5,7 +5,6 @@ export interface Champion {
   name: string
   title: string
   blurb: string
-  imageUrl: string
   info: {
     attack: number
     defense: number
@@ -48,6 +47,7 @@ export interface Champion {
 }
 
 export interface ChampionDetail extends Champion {
+  version: string
   skins: {
     id: string
     num: number

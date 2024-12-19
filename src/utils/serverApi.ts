@@ -14,28 +14,24 @@ async function getLatestVersion(): Promise<string> {
   }
 }
 
-function getChampionImageUrl(version: string, imageFileName: string): string {
-  return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${imageFileName}`
-}
-
 function getItemImageUrl(version: string, imageFileName: string): string {
   return `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${imageFileName}`
 }
 
-async function createChampionsWithImage(
-  champions: Record<string, Champion>,
-  version: string
-) {
-  const updatedChampions: Record<string, Champion> = {}
+// async function createChampionsWithImage(
+//   champions: Record<string, Champion>,
+//   version: string
+// ) {
+//   const updatedChampions: Record<string, Champion> = {}
 
-  Object.keys(champions).forEach((championName) => {
-    const champion = champions[championName]
-    const imageUrl = getChampionImageUrl(version, champion.image.full)
-    updatedChampions[championName] = { ...champion, imageUrl }
-  })
+//   Object.keys(champions).forEach((championName) => {
+//     const champion = champions[championName]
+//     const imageUrl = getChampionImageUrl(version, champion.image.full)
+//     updatedChampions[championName] = { ...champion, imageUrl }
+//   })
 
-  return updatedChampions
-}
+//   return updatedChampions
+// }
 
 async function createItemsWithImage(
   items: Record<string, Item>,
@@ -65,8 +61,7 @@ export async function getChampions(): Promise<Record<string, Champion>> {
     )
     if (!response.ok) throw new Error('Failed to fetch champions')
     const data = await response.json()
-    const champions = data.data
-    return await createChampionsWithImage(champions, version)
+    return data.data
   } catch (error: any) {
     throw new Error(error.message)
   }
@@ -74,7 +69,7 @@ export async function getChampions(): Promise<Record<string, Champion>> {
 
 export async function getChampionDetailById(
   id: string
-): Promise<ChampionDetail> {
+): Promise<{ version: string; data: ChampionDetail }> {
   try {
     const version = await getLatestVersion()
     const response = await fetch(
@@ -88,11 +83,7 @@ export async function getChampionDetailById(
     if (!response.ok) throw new Error('Failed to fetch champions detail')
     const data = await response.json()
     if (!data.data[id]) throw new Error(`Champion ${id} not found`)
-
-    // imageUrl 추가
-    const championDetail = data.data[id]
-    const imageUrl = getChampionImageUrl(version, championDetail.image.full)
-    return { ...championDetail, imageUrl }
+    return { version, data: data.data[id] }
   } catch (error: any) {
     throw new Error(error.message)
   }

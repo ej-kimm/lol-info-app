@@ -14,7 +14,7 @@ export default function ChampionCard({ champion }: ChampionCardProps) {
         <div className="relative flex flex-col items-center">
           <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-black dark:border-gray-400">
             <Image
-              src={champion.imageUrl}
+              src={`https://ddragon.leagueoflegends.com/cdn/${champion.version}/img/champion/${champion.image.full}`}
               width={130}
               height={130}
               alt={champion.id}

@@ -2,10 +2,14 @@ import type { ChampionDetail } from '@/types/Champion'
 import Image from 'next/image'
 import React from 'react'
 
-type ChampionDetailProps = { championDetail: ChampionDetail }
+type ChampionDetailProps = {
+  championDetail: ChampionDetail
+  version: string
+}
 
 export default function ChampionDetail({
   championDetail,
+  version,
 }: ChampionDetailProps) {
   return (
     <section className="h-full flex flex-col items-center justify-center">
@@ -20,7 +24,7 @@ export default function ChampionDetail({
 
           <div className="flex justify-around items-center mb-8">
             <Image
-              src={championDetail.imageUrl}
+              src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championDetail.image.full}`}
               width={220}
               height={220}
               alt={championDetail.id}
