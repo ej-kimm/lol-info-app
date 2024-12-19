@@ -23,6 +23,7 @@ export default function Home() {
           src="https://cmsassets.rgpub.io/sanity/files/dsfx7636/news/8ab3e227121c53aacab0c9b9f7a48adbc65db520.webm"
           autoPlay
           loop
+          muted
         ></video>
       </div>
     </>
